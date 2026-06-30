@@ -1,0 +1,34 @@
+/* Headings */
+h1,
+h2,
+h3,
+.section-title {
+  font-family: "Playfair Display", serif;
+}
+
+/* Body text & UI */
+body,
+p,
+button,
+a,
+span {
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #fdf3f5;
+  font-family: "Poppins", sans-serif;
+  color: #5a3a3a;
+}
+
+.hero-title {
+  font-family: "Playfair Display", serif;
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.button-primary {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  border-radius: 12px;
+}

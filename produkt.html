@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Glowify</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <script src="./js/produkt.js"></script>
+  </head>
+
+  <body class="bg-pink-100 min-h-dvh flex flex-col">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full z-50">
+      <div class="navbar bg-pink-200 shadow-sm">
+        <div class="navbar-start">
+          <img src="images/logo.png" alt="Logo" class="w-12" />
+          <span class="font-bold text-lg">Glowify</span>
+        </div>
+
+        <div class="navbar-center hidden lg:flex">
+          <ul class="menu menu-horizontal px-1">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="produkt.html">Shop</a></li>
+            <li><a href="contact.htm">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="navbar-end gap-2">
+          <a class="btn bg-pink-300 border-none hover:bg-pink-400 mr-5"
+            >Shop Now</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <main class="flex-1 pt-28 pb-16">
+      <!-- Hero -->
+      <section class="hero bg-pink-100 mb-16">
+        <div class="hero-content flex-col lg:flex-row">
+          <img src="images/Main.png" class="max-w-sm rounded-lg shadow" />
+          <div>
+            <h1 class="text-5xl font-bold mb-4">Glowify's Products</h1>
+            <p class="mb-6 max-w-xl">
+              “Enhance your natural beauty with our luxurious skincare and
+              makeup products. Glowify is a fictional beauty and skincare that
+              comforts your skin, restores its balance, and lets your natural
+              glow unfold—day and night."
+            </p>
+            <a href="index.html" class="text-pink-600 hover:underline">
+              ← Back To Homepage
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Products Grid -->
+      <section
+        class="grid gap-5 px-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-items-center"
+      >
+        <!-- Card -->
+        <div class="card bg-base-200 w-80 shadow-md hover:shadow-xl transition">
+          <figure>
+            <img src="images/serum.jpeg" alt="Serum" />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">Radiant Glow Serum</h2>
+            <p>
+              Radiant Glow Serum transforms dull skin into soft, luminous
+              radiance.
+            </p>
+            <div class="flex justify-between items-center mt-3">
+              <span class="text-lg font-semibold">€59.99</span>
+              <button class="btn btn-secondary btn-sm">Buy Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card -->
+        <div class="card bg-base-200 w-80 shadow-md hover:shadow-xl transition">
+          <figure>
+            <img src="images/Nacht cream.jpeg" alt="Cream" />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">Nourishing Cream</h2>
+            <p>Deep repair overnight. Ultra-nourishing, fast-absorbing.</p>
+            <div class="flex justify-between items-center mt-3">
+              <span class="text-lg font-semibold">€75.99</span>
+              <button class="btn btn-secondary btn-sm">Buy Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card -->
+        <div class="card bg-base-200 w-80 shadow-md hover:shadow-xl transition">
+          <figure>
+            <img src="images/psck.jpeg" alt="Pack" />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">Glowify Trio</h2>
+            <p>
+              A gentle trio that leaves skin balanced, hydrated, and glowing.
+            </p>
+            <div class="flex justify-between items-center mt-3">
+              <span class="text-lg font-semibold">129.99€</span>
+              <button class="btn btn-secondary btn-sm">Buy Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card -->
+        <div class="card bg-base-200 w-80 shadow-md hover:shadow-xl transition">
+          <figure>
+            <img src="images/pack.jpeg" alt="Pack" />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">Glowify Pack</h2>
+            <p>Your daily ritual for fresh, hydrated, radiant skin.</p>
+            <div class="flex justify-between items-center mt-3">
+              <span class="text-lg font-semibold">168.99€</span>
+              <button class="btn btn-secondary btn-sm">Buy Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card -->
+        <div class="card bg-base-200 w-80 shadow-md hover:shadow-xl transition">
+          <figure>
+            <img src="images/essential.jpeg" alt="Pack" />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">The Glow Ritual</h2>
+            <p>Nourishes, hydrates, and enhances natural glow.</p>
+            <div class="flex justify-between items-center mt-3">
+              <span class="text-lg font-semibold">199.99€</span>
+              <button class="btn btn-secondary btn-sm">Buy Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card -->
+        <div class="card bg-base-200 w-80 shadow-md hover:shadow-xl transition">
+          <figure>
+            <img src="images/nightpack.jpeg" alt="Pack" />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">Glowify Night Care</h2>
+            <p>
+              Night Pack: cream, serum, and mask to nourish and revitalize
+              overnight.
+            </p>
+            <div class="flex justify-between items-center mt-3">
+              <span class="text-lg font-semibold">179.99€</span>
+              <button class="btn btn-secondary btn-sm">Buy Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card -->
+        <div class="card bg-base-200 w-80 shadow-md hover:shadow-xl transition">
+          <figure>
+            <img src="images/deall.jpg" alt="Pack" />
+          </figure>
+          <div class="card-body">
+            <div class="badge badge-soft badge-warning">New</div>
+            <h2 class="card-title">Glowify Essentials</h2>
+            <p>Complete skincare set for daily glow and hydration.</p>
+            <div class="flex justify-between items-center mt-3">
+              <span class="text-lg font-semibold">179.99€</span>
+              <button class="btn btn-secondary btn-sm">Buy Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card -->
+        <div class="card bg-base-200 w-80 shadow-md hover:shadow-xl transition">
+          <figure>
+            <img
+              src="images/bestdeal.jpg"
+              alt="night cream with blue theme Sensetive"
+            />
+          </figure>
+          <div class="card-body">
+            <div class="badge badge-soft badge-warning">New</div>
+            <h2 class="card-title">Limited-Edition Glow Set</h2>
+            <p>
+              Cleanser, serum, and moisturizer for radiant skin—limited time
+              only.
+            </p>
+            <div class="flex justify-between items-center mt-3">
+              <span class="text-lg font-semibold">270.99€</span>
+              <button class="btn btn-secondary btn-sm">Buy Now</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+
+    <footer
+      class="footer sm:footer-horizontal bg-pink-200 text-base-content p-10"
+    >
+      <nav>
+        <h6 class="footer-title">Services</h6>
+        <a class="link link-hover">Skincare Guide</a>
+        <a class="link link-hover">Consultation</a>
+      </nav>
+      <nav>
+        <h6 class="footer-title">Company</h6>
+        <a href="index.html" class="link link-hover">Home</a>
+        <a href="contact.htm" class="link link-hover">Contact</a>
+      </nav>
+      <form>
+        <h6 class="footer-title">Newsletter</h6>
+        <fieldset class="w-80">
+          <label>Get updates on new drops</label>
+          <div class="join mt-2">
+            <input
+              type="text"
+              placeholder="email@glowify.com"
+              class="input input-bordered join-item"
+            />
+            <button class="btn btn-secondary bg-pink-400 border-none join-item">
+              Join
+            </button>
+          </div>
+        </fieldset>
+      </form>
+    </footer>
+  </body>
+</html>
