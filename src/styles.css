@@ -10,10 +10,22 @@
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
 body {
   margin: 0;
   min-width: 320px;
   background: #fdf3f5;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 button,
@@ -107,7 +119,8 @@ nav button:hover,
 }
 
 main {
-  min-height: 72vh;
+  flex: 1;
+  min-height: calc(100vh - 238px);
 }
 
 .hero-section {
@@ -442,6 +455,8 @@ textarea:focus {
   display: grid;
   grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
   gap: 24px;
+  align-content: start;
+  min-height: calc(100vh - 278px);
 }
 
 .contact-info,
