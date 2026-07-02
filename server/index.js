@@ -27,7 +27,7 @@ app.post("/api/contact", (req, res) => {
   const { name, email, message } = req.body;
 
   if (!name || !email || !message) {
-    return res.status(400).json({ error: "Bitte alle Kontaktfelder ausfuellen." });
+    return res.status(400).json({ error: "Please fill in all contact fields." });
   }
 
   const savedMessage = {
@@ -46,7 +46,7 @@ app.post("/api/newsletter", (req, res) => {
   const { email } = req.body;
 
   if (!email || !email.includes("@")) {
-    return res.status(400).json({ error: "Bitte eine gueltige E-Mail eingeben." });
+    return res.status(400).json({ error: "Please enter a valid email address." });
   }
 
   newsletter.push({ email, createdAt: new Date().toISOString() });
@@ -57,21 +57,21 @@ app.post("/api/checkout", (req, res) => {
   const { cart, customer, payment } = req.body;
 
   if (!Array.isArray(cart) || cart.length === 0) {
-    return res.status(400).json({ error: "Dein Warenkorb ist leer." });
+    return res.status(400).json({ error: "Your cart is empty." });
   }
 
   if (!customer?.name || !customer?.email || !customer?.address) {
-    return res.status(400).json({ error: "Bitte Lieferdaten vollstaendig ausfuellen." });
+    return res.status(400).json({ error: "Please complete your shipping details." });
   }
 
   if (!payment?.cardName || !payment?.cardNumber || !payment?.expiry || !payment?.cvc) {
-    return res.status(400).json({ error: "Bitte Zahlungsdaten vollstaendig ausfuellen." });
+    return res.status(400).json({ error: "Please complete your payment details." });
   }
 
   const items = cart.map((item) => {
     const product = getProduct(item.id);
     if (!product) {
-      throw new Error(`Produkt ${item.id} wurde nicht gefunden.`);
+      throw new Error(`Product ${item.id} was not found.`);
     }
 
     const quantity = Math.max(1, Number(item.quantity) || 1);
@@ -104,7 +104,7 @@ app.post("/api/checkout", (req, res) => {
 });
 
 app.use((error, req, res, next) => {
-  res.status(400).json({ error: error.message || "Etwas ist schiefgelaufen." });
+  res.status(400).json({ error: error.message || "Something went wrong." });
 });
 
 app.listen(port, () => {

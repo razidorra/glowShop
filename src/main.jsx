@@ -18,7 +18,7 @@ import { products as staticProducts } from "./products";
 import "./styles.css";
 
 const formatPrice = (value) =>
-  new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" }).format(value);
+  new Intl.NumberFormat("en-US", { style: "currency", currency: "EUR" }).format(value);
 
 function App() {
   const [products, setProducts] = useState(staticProducts);
@@ -51,7 +51,7 @@ function App() {
       return [...current, { ...product, quantity: 1 }];
     });
     setOrder(null);
-    setNotice(`${product.name} wurde in den Warenkorb gelegt.`);
+    setNotice(`${product.name} was added to your cart.`);
     if (goToCart) {
       setView("cart");
     }
@@ -84,7 +84,7 @@ function App() {
       data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Die Zahlung konnte nicht abgeschlossen werden.");
+        throw new Error(data.error || "The payment could not be completed.");
       }
     } catch {
       const shipping = subtotal >= 120 || subtotal === 0 ? 0 : 4.9;
@@ -142,7 +142,7 @@ function Header({ cartCount, setView }) {
         <button onClick={() => setView("shop")}>Shop</button>
         <button onClick={() => setView("contact")}>Contact</button>
       </nav>
-      <button className="cart-button" onClick={() => setView("cart")} aria-label="Warenkorb">
+      <button className="cart-button" onClick={() => setView("cart")} aria-label="Cart">
         <ShoppingBag size={19} />
         <span>{cartCount}</span>
       </button>
@@ -159,16 +159,16 @@ function Home({ products, addToCart, setView }) {
           <span className="eyebrow">Beauty and skincare essentials</span>
           <h1>Glowify</h1>
           <p>
-            Sanfte Routinen fuer jeden Tag: Seren, Cremes und Sets, die deine Haut pflegen,
-            beruhigen und sichtbar strahlen lassen.
+            Gentle everyday routines: serums, creams, and sets that care for your skin,
+            calm it, and help it glow visibly.
           </p>
           <div className="hero-actions">
             <button className="primary-button" onClick={() => setView("shop")}>
               <ShoppingBag size={18} />
-              Shop ansehen
+              View Shop
             </button>
             <button className="ghost-button" onClick={() => setView("cart")}>
-              Zur Kasse
+              Checkout
             </button>
           </div>
         </div>
@@ -177,7 +177,7 @@ function Home({ products, addToCart, setView }) {
       <section className="section">
         <div className="section-heading">
           <span className="eyebrow">Best deals</span>
-          <h2>Beliebte Glowify Produkte</h2>
+          <h2>Popular Glowify Products</h2>
         </div>
         <ProductGrid products={featured} addToCart={addToCart} />
       </section>
@@ -190,8 +190,8 @@ function Shop({ products, addToCart }) {
     <section className="section shop-section">
       <div className="section-heading">
         <span className="eyebrow">Shop</span>
-        <h1>Glowify Produkte</h1>
-        <p>Waehle ein Produkt aus. Mit "Kaufen" landest du direkt im Warenkorb.</p>
+        <h1>Glowify Products</h1>
+        <p>Choose a product. With "Buy Now", it goes straight into your cart.</p>
       </div>
       <ProductGrid products={products} addToCart={addToCart} />
     </section>
@@ -215,7 +215,7 @@ function ProductGrid({ products, addToCart }) {
               <strong>{formatPrice(product.price)}</strong>
               <button onClick={() => addToCart(product)}>
                 <ShoppingBag size={17} />
-                Kaufen
+                Buy Now
               </button>
             </div>
           </div>
@@ -270,14 +270,14 @@ function Cart({ cart, subtotal, updateQuantity, removeFromCart, placeOrder, setV
       <div>
         <div className="section-heading compact">
           <span className="eyebrow">Cart</span>
-          <h1>Warenkorb und Zahlung</h1>
+          <h1>Cart and Payment</h1>
         </div>
         {cart.length === 0 ? (
           <div className="empty-state">
             <ShoppingBag size={34} />
-            <h2>Dein Warenkorb ist leer.</h2>
+            <h2>Your cart is empty.</h2>
             <button className="primary-button" onClick={() => setView("shop")}>
-              Shop ansehen
+              View Shop
             </button>
           </div>
         ) : (
@@ -290,11 +290,11 @@ function Cart({ cart, subtotal, updateQuantity, removeFromCart, placeOrder, setV
                   <p>{formatPrice(item.price)}</p>
                 </div>
                 <div className="quantity-controls">
-                  <button onClick={() => updateQuantity(item.id, -1)} aria-label="Weniger">
+                  <button onClick={() => updateQuantity(item.id, -1)} aria-label="Decrease quantity">
                     <Minus size={15} />
                   </button>
                   <span>{item.quantity}</span>
-                  <button onClick={() => updateQuantity(item.id, 1)} aria-label="Mehr">
+                  <button onClick={() => updateQuantity(item.id, 1)} aria-label="Increase quantity">
                     <Plus size={15} />
                   </button>
                 </div>
@@ -308,18 +308,18 @@ function Cart({ cart, subtotal, updateQuantity, removeFromCart, placeOrder, setV
         )}
       </div>
       <aside className="checkout-panel">
-        <h2>Bezahlen</h2>
+        <h2>Payment</h2>
         <div className="totals">
-          <span>Zwischensumme <strong>{formatPrice(subtotal)}</strong></span>
-          <span>Versand <strong>{shipping === 0 ? "Gratis" : formatPrice(shipping)}</strong></span>
-          <span className="total">Gesamt <strong>{formatPrice(total)}</strong></span>
+          <span>Subtotal <strong>{formatPrice(subtotal)}</strong></span>
+          <span>Shipping <strong>{shipping === 0 ? "Free" : formatPrice(shipping)}</strong></span>
+          <span className="total">Total <strong>{formatPrice(total)}</strong></span>
         </div>
         <form onSubmit={handleSubmit}>
           <input required placeholder="Name" value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} />
-          <input required type="email" placeholder="E-Mail" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} />
-          <input required placeholder="Adresse" value={form.address} onChange={(event) => setForm({ ...form, address: event.target.value })} />
-          <input required placeholder="Name auf Karte" value={form.cardName} onChange={(event) => setForm({ ...form, cardName: event.target.value })} />
-          <input required inputMode="numeric" placeholder="Kartennummer" value={form.cardNumber} onChange={(event) => setForm({ ...form, cardNumber: event.target.value })} />
+          <input required type="email" placeholder="Email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} />
+          <input required placeholder="Address" value={form.address} onChange={(event) => setForm({ ...form, address: event.target.value })} />
+          <input required placeholder="Name on card" value={form.cardName} onChange={(event) => setForm({ ...form, cardName: event.target.value })} />
+          <input required inputMode="numeric" placeholder="Card number" value={form.cardNumber} onChange={(event) => setForm({ ...form, cardNumber: event.target.value })} />
           <div className="two-fields">
             <input required placeholder="MM/JJ" value={form.expiry} onChange={(event) => setForm({ ...form, expiry: event.target.value })} />
             <input required inputMode="numeric" placeholder="CVC" value={form.cvc} onChange={(event) => setForm({ ...form, cvc: event.target.value })} />
@@ -327,7 +327,7 @@ function Cart({ cart, subtotal, updateQuantity, removeFromCart, placeOrder, setV
           {error && <p className="form-error">{error}</p>}
           <button className="primary-button full" disabled={cart.length === 0 || loading}>
             <CreditCard size={18} />
-            {loading ? "Zahlung laeuft..." : "Jetzt bezahlen"}
+            {loading ? "Processing payment..." : "Pay Now"}
           </button>
         </form>
       </aside>
@@ -352,7 +352,7 @@ function Contact() {
 
       if (!response.ok) {
         const data = await response.json();
-        setError(data.error || "Nachricht konnte nicht gesendet werden.");
+        setError(data.error || "Your message could not be sent.");
         return;
       }
     } catch {
@@ -368,7 +368,7 @@ function Contact() {
       <div className="contact-info">
         <span className="eyebrow">Contact</span>
         <h1>Contact Our Team</h1>
-        <p>Wir helfen dir bei Fragen zu Produkten, Routinen und Bestellungen.</p>
+        <p>We can help with questions about products, routines, and orders.</p>
         <p><Mail size={18} /> razidorra@glowify.com</p>
         <p><MapPin size={18} /> Glowify Shop, Buchholz, Germany</p>
       </div>
@@ -376,7 +376,7 @@ function Contact() {
         <input required name="name" placeholder="Full Name" />
         <input required name="email" type="email" placeholder="Email Address" />
         <textarea required name="message" placeholder="Your Message" rows="6" />
-        {sent && <p className="form-success">Danke, deine Nachricht wurde gesendet.</p>}
+        {sent && <p className="form-success">Thank you, your message has been sent.</p>}
         {error && <p className="form-error">{error}</p>}
         <button className="primary-button full">Send Message</button>
       </form>
@@ -388,16 +388,16 @@ function Success({ order, setView }) {
   return (
     <section className="section success-state">
       <CheckCircle2 size={56} />
-      <h1>Bestellung abgeschlossen</h1>
-      <p>Danke fuer deinen Einkauf. Deine Demo-Zahlung wurde angenommen.</p>
+      <h1>Order Complete</h1>
+      <p>Thank you for shopping with us. Your demo payment was accepted.</p>
       {order && (
         <div className="order-box">
-          <span>Bestellnummer <strong>{order.id}</strong></span>
-          <span>Gesamt <strong>{formatPrice(order.total)}</strong></span>
+          <span>Order number <strong>{order.id}</strong></span>
+          <span>Total <strong>{formatPrice(order.total)}</strong></span>
         </div>
       )}
       <button className="primary-button" onClick={() => setView("shop")}>
-        Weiter einkaufen
+        Continue Shopping
       </button>
     </section>
   );
@@ -415,10 +415,10 @@ function Footer() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email })
       });
-      setMessage(response.ok ? "Danke fuer deine Anmeldung." : "Bitte E-Mail pruefen.");
+      setMessage(response.ok ? "Thank you for signing up." : "Please check your email address.");
       if (response.ok) setEmail("");
     } catch {
-      setMessage("Danke fuer deine Anmeldung.");
+      setMessage("Thank you for signing up.");
       setEmail("");
     }
   };
@@ -427,7 +427,7 @@ function Footer() {
     <footer>
       <div>
         <h3><Sparkles size={19} /> Glowify</h3>
-        <p>Skincare Guide, Consultation und liebevoll kuratierte Glow-Routinen.</p>
+        <p>Skincare guides, consultations, and carefully curated glow routines.</p>
       </div>
       <form onSubmit={submitNewsletter}>
         <label>Newsletter</label>
