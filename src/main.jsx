@@ -7,9 +7,11 @@ import {
   Mail,
   MapPin,
   Minus,
+  Moon,
   Plus,
   ShoppingBag,
   Sparkles,
+  Sun,
   Trash2
 } from "lucide-react";
 import logoImage from "../images/logo.png";
@@ -26,11 +28,37 @@ function App() {
   const [view, setView] = useState("home");
   const [notice, setNotice] = useState("");
   const [order, setOrder] = useState(null);
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem("glowify-theme");
+    if (savedTheme === "light" || savedTheme === "dark") return savedTheme;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  });
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem("glowify-theme", theme);
+  }, [theme]);
 
   useEffect(() => {
     fetch("/api/products")
-      .then((response) => response.json())
-      .then(setProducts)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Products API is unavailable.");
+        }
+        return response.json();
+      })
+      .then((apiProducts) => {
+        const localImages = new Map(
+          staticProducts.map((product) => [product.id, product.image])
+        );
+
+        setProducts(
+          apiProducts.map((product) => ({
+            ...product,
+            image: localImages.get(product.id) || product.image
+          }))
+        );
+      })
       .catch(() => setProducts(staticProducts));
   }, []);
 
@@ -103,7 +131,12 @@ function App() {
 
   return (
     <>
-      <Header cartCount={cartCount} setView={setView} />
+      <Header
+        cartCount={cartCount}
+        setView={setView}
+        theme={theme}
+        toggleTheme={() => setTheme((current) => current === "light" ? "dark" : "light")}
+      />
       <main>
         {notice && (
           <button className="notice" onClick={() => setNotice("")}>
@@ -130,7 +163,7 @@ function App() {
   );
 }
 
-function Header({ cartCount, setView }) {
+function Header({ cartCount, setView, theme, toggleTheme }) {
   return (
     <header className="site-header">
       <button className="brand" onClick={() => setView("home")}>
@@ -142,10 +175,20 @@ function Header({ cartCount, setView }) {
         <button onClick={() => setView("shop")}>Shop</button>
         <button onClick={() => setView("contact")}>Contact</button>
       </nav>
-      <button className="cart-button" onClick={() => setView("cart")} aria-label="Cart">
-        <ShoppingBag size={19} />
-        <span>{cartCount}</span>
-      </button>
+      <div className="header-actions">
+        <button
+          className="theme-toggle"
+          onClick={toggleTheme}
+          aria-label={theme === "dark" ? "Use light mode" : "Use dark mode"}
+          title={theme === "dark" ? "Light mode" : "Dark mode"}
+        >
+          {theme === "dark" ? <Sun size={19} /> : <Moon size={19} />}
+        </button>
+        <button className="cart-button" onClick={() => setView("cart")} aria-label="Cart">
+          <ShoppingBag size={19} />
+          <span>{cartCount}</span>
+        </button>
+      </div>
     </header>
   );
 }
@@ -172,7 +215,17 @@ function Home({ products, addToCart, setView }) {
             </button>
           </div>
         </div>
-        <img className="hero-image" src={mainImage} alt="Glowify skincare products" />
+        <div className="hero-visual">
+          <span className="hero-petal hero-petal-one" aria-hidden="true" />
+          <span className="hero-petal hero-petal-two" aria-hidden="true" />
+          <div className="hero-image-glow">
+            <img className="hero-image" src={mainImage} alt="Glowify skincare products" />
+          </div>
+          <div className="hero-note">
+            <Sparkles size={17} aria-hidden="true" />
+            <span><strong>Soft care</strong> for your daily glow</span>
+          </div>
+        </div>
       </section>
       <section className="section">
         <div className="section-heading">
